@@ -1,0 +1,5 @@
+AP_NAME=TPE-Free
+CLOSE_APP=Microsoft Outlook, Microsoft Communicator
+OPEN_APP=Skype
+OPEN_PERMANENT=True
+CLOSE_PERMANENT=False
