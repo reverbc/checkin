@@ -9,12 +9,9 @@ Installation
 1. Clone the code to your local machine
 2. Modify application configuration and save it to `conf/application.conf`
 3. Modify location definition and desired action and save it to `conf/location.YOUR_LOCATION_NAME.conf`
-4. Make checkin.py as an executable script
-```
-chmod +x /PATH/TO/PROJECT/checkin/checkin.py
-```
-5. Modify `CONF_PATH` var in `lib/ciconf.py` 
-6. Put `com.reverb.checkin.plist` into `~/Library/LaunchAgents/` and point the `ProgramArguments` var in plist to your checkin executable path
+4. Make checkin.py as an executable script: `chmod +x /PATH/TO/PROJECT/checkin/checkin.py`
+5. Modify `CONF_PATH` variable in `lib/ciconf.py` 
+6. Put `com.reverb.checkin.plist` into `~/Library/LaunchAgents/` and point the `ProgramArguments` variable in plist to your checkin executable path
 7. Done!
 
 Application Configuration (application.conf)
