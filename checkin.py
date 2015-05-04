@@ -42,7 +42,7 @@ def go():
     last_ap = load_last_ap()
     current_ap = ciutils.get_ap_name()
 
-    if current_ap is None:
+    if not current_ap:
         logging.info('No connection...bye.')
         return 0
     elif last_ap == current_ap:
