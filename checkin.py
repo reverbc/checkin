@@ -36,6 +36,11 @@ def update_last_ap(latest_ap):
     config.write(latest_ap)
     config.close()
 
+def show_notification(current_ap, ip):
+    from commands import getstatusoutput
+    cmd = '/usr/local/bin/terminal-notifier -title \"Check In\" -message \"just checked in at:\n%s (%s)\" -contentImage \"/Users/reverb/Dropbox/Photos/icon/Reverb/Reverb by Dannvix.png\"' % (current_ap, ip)
+    (ret, out) = getstatusoutput(cmd)
+
 def go():
     location_list = ciplaces.get_instance().get_place_list()
 
@@ -45,11 +50,17 @@ def go():
     if not current_ap:
         logging.info('No connection...bye.')
         return 0
+
+    ip = ciutils.get_current_ip()
+    if ip == '127.0.0.1':
+        logging.info('No IP assigned. Keep sleeping...')
+        return 0
     elif last_ap == current_ap:
         logging.info('I am not connecting to different AP...bye :)')
     else:
         i_know_this_place = False
         logging.info('Changing AP from [%s] to [%s].' % (last_ap, current_ap))
+        show_notification(current_ap, ip)
         for location in location_list.keys():
             if current_ap in location_list[location].ap_name:
                 location_list[location].i_am_here()
@@ -60,7 +71,7 @@ def go():
             logging.warning('Current AP is not recorded.')
 
     update_last_ap(current_ap)
-    logging.info('Currently connecting to AP [%s] with IP [%s]' % (current_ap, ciutils.get_current_ip()))
+    logging.info('Currently connecting to AP [%s] with IP [%s]' % (current_ap, ip))
     return 0
 
 if __name__ == '__main__':
