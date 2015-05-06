@@ -38,7 +38,7 @@ def update_last_ap(latest_ap):
 
 def show_notification(current_ap, ip):
     from commands import getstatusoutput
-    cmd = '/usr/local/bin/terminal-notifier -title \"Check In\" -message \"just checked in at:\n%s (%s)\" -contentImage \"/Users/reverb/Dropbox/Photos/icon/Reverb/Reverb by Dannvix.png\"' % (current_ap, ip)
+    cmd = '/usr/local/bin/terminal-notifier -title \"Check In\" -message \"just checked in at:\n%s (%s)\"' % (current_ap, ip)
     (ret, out) = getstatusoutput(cmd)
 
 def go():
