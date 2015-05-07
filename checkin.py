@@ -44,37 +44,33 @@ def show_notification(current_ap, ip, current_location):
     (ret, out) = getstatusoutput(cmd)
 
 def go():
-    location_list = ciplaces.get_instance().get_place_list()
-
-    last_ap = load_last_ap()
     current_ap = ciutils.get_ap_name()
-    current_location = 'nowhere'
-
+    
     if not current_ap:
         logging.info('No connection...bye.')
-        return 0
-
-    ip = ciutils.get_current_ip()
-    if ip == '127.0.0.1':
-        logging.info('No IP assigned. Keep sleeping...')
-        return 0
-    elif last_ap == current_ap:
-        logging.info('I am not connecting to different AP...bye :)')
     else:
-        logging.info('Changing AP from [%s] to [%s].' % (last_ap, current_ap))
-        for location in location_list.keys():
-            if current_ap in location_list[location].ap_name:
-                location_list[location].i_am_here()
-                current_location = location
-            elif last_ap in location_list[location].ap_name:
-                location_list[location].leaving_here()
-        if not current_location:
-            logging.warning('Current AP is not recorded.')
-        show_notification(current_ap, ip, current_location)
+        location_list = ciplaces.get_instance().get_place_list()
+        last_ap = load_last_ap()
+        current_location = 'nowhere'
 
-    update_last_ap(current_ap)
-    logging.info('Currently connecting to AP [%s] with IP [%s]' % (current_ap, ip))
-    return 0
+        ip = ciutils.get_current_ip()
+        if ip == '127.0.0.1':
+            logging.info('No IP assigned. Keep sleeping...')
+        elif last_ap == current_ap:
+            logging.info('I am not connecting to different AP...bye :)')
+        else:
+            logging.info('Changing AP from [%s] to [%s].' % (last_ap, current_ap))
+            for location in location_list.keys():
+                if current_ap in location_list[location].ap_name:
+                    location_list[location].checkin()
+                    current_location = location
+                elif last_ap in location_list[location].ap_name:
+                    location_list[location].checkout()
+            if not current_location:
+                logging.warning('Current AP is not recorded.')
+            show_notification(current_ap, ip, current_location)
+            update_last_ap(current_ap)
+            logging.info('Currently connecting to AP [%s] with IP [%s]' % (current_ap, ip))
 
 if __name__ == '__main__':
     init()
