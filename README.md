@@ -3,6 +3,11 @@ Check In
 
 This is a small tool for Mac that will automatically do something when changing to different wireless work - i.e. connecting to different AP. 
 
+Prerequisite
+------------
+
+1. Install `terminal-notifier` from [alloy/terminal-notifier](https://github.com/alloy/terminal-notifier)
+
 Installation
 ------------
 
@@ -11,7 +16,7 @@ Installation
 3. Modify location definition and desired action and save it to `conf/location.YOUR_LOCATION_NAME.conf`
 4. Make checkin.py as an executable script: `chmod +x /PATH/TO/PROJECT/checkin/checkin.py`
 5. Modify `CONF_PATH` variable in `lib/ciconf.py` 
-6. Put `com.reverb.checkin.plist` into `~/Library/LaunchAgents/` and point the `ProgramArguments` variable in plist to your checkin executable path
+6. Put `com.reverbhorn.checkin.plist` into `~/Library/LaunchAgents/` and point the `ProgramArguments` variable in plist to your checkin executable path
 7. Done!
 
 Application Configuration (application.conf)
