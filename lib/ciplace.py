@@ -26,12 +26,19 @@ class CIPlace(object):
             if not ret:
                 logging.error('Failed to open app: %s (%s)' % (app.name, app.path))
 
-    def i_am_here(self):
+    def execute_script(self, script_type):
+        script_path = 'scripts/%s.%s.sh' % (script_type, self.name)
+        if os.path.isfile(script_path):
+            cmd = '/bin/bash %s' % script_path
+            (ret, out) = getstatusoutput(cmd)
+
+    def checkin(self):
+        self.execute_script('checkin')
         self.close_app()
         self.open_app()
 
-    def leaving_here(self):
-        pass
+    def checkout(self):
+        self.execute_script('checkout')
 
     def dump(self):
         print 'ap_name = %s' % self.ap_name
