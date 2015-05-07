@@ -1,8 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 from lib import ciplaces
 from lib import ciutils
 from lib import ciconf
+
 import logging
+from commands import getstatusoutput
 
 IS_DEBUG = False
 
@@ -12,13 +14,16 @@ def init():
     if IS_DEBUG:
         log_level = logging.DEBUG
         log_file = None
+        module_info = '[%(module)s.%(funcName)s]'
     else:
         log_level = logging.INFO
         log_file = ciconf.LOG_FILE
+        module_info = ''
 
-    # NOTE: to enable module/method tracking: add '[%(module)s.%(funcName)s]'
-    logging.basicConfig(filename=log_file, level=log_level, datefmt='%Y.%m.%d %H:%M:%S', 
-                        format='%(asctime)s [%(levelname)s]\t%(message)s')
+    log_format = '%(asctime)s [%(levelname)s]' + module_info + '\t%(message)s'
+    date_format = '%Y.%m.%d %H:%M:%S'
+
+    logging.basicConfig(filename=log_file, level=log_level, datefmt=date_format, format=log_format)
 
 def load_last_ap():
     latest_ap = ''
@@ -37,10 +42,13 @@ def update_last_ap(latest_ap):
     config.close()
 
 def show_notification(current_ap, ip, current_location):
-    from commands import getstatusoutput
     cmd = '/usr/local/bin/terminal-notifier -title \"Check In\"'
     cmd += ' -subtitle \"%s (%s)\"' % (current_ap, ip)
     cmd += ' -message \"just checked in at %s.\"' % current_location
+
+    if ciconf.NOTIFICATION_ICON:
+        cmd += ' -contentImage \"%s\"' % ciconf.NOTIFICATION_ICON
+
     (ret, out) = getstatusoutput(cmd)
 
 def go():
