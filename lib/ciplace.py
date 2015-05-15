@@ -27,7 +27,7 @@ class CIPlace(object):
                 logging.error('Failed to open app: %s (%s)' % (app.name, app.path))
 
     def execute_script(self, script_type):
-        script_path = 'scripts/%s.%s.sh' % (script_type, self.name)
+        script_path = '%s/%s.%s.sh' % (ciconf.SCRIPT_PATH, script_type, self.name)
         if os.path.isfile(script_path):
             cmd = '/bin/bash %s' % script_path
             (ret, out) = getstatusoutput(cmd)
