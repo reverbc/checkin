@@ -1,7 +1,13 @@
 #!/usr/bin/env python
+try:
+    from lib import ciconf
+except ImportError:
+    print 'Please initial [lib/ciconf.py] before execute the script.'
+    import sys
+    sys.exit()
+
 from lib import ciplaces
 from lib import ciutils
-from lib import ciconf
 
 import logging
 from commands import getstatusoutput

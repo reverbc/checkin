@@ -61,16 +61,21 @@ class CIApps(object):
         self._app_list = dict()
         self._papp_list = list()
 
-        with open('%s/%s' % (ciconf.CONF_PATH, ciconf.APP_CONF), 'r') as f:
-            line = '#'
-            while line:
-                if not line.startswith('#') and line.strip():
-                    try:
-                        app_entry = line.split(',')
-                        self.add_app(app_entry[0], app_entry[1], app_entry[2], eval(app_entry[3]))
-                    except Exception, ex:
-                        logging.error('Failed to parse line (%s):\n\t-> %s' % (ex, str(line)))
-                line = f.readline()
+        try:
+            with open('%s/%s' % (ciconf.CONF_PATH, ciconf.APP_CONF), 'r') as f:
+                line = '#'
+                while line:
+                    if not line.startswith('#') and line.strip():
+                        try:
+                            app_entry = line.split(',')
+                            self.add_app(app_entry[0], app_entry[1], app_entry[2], eval(app_entry[3]))
+                        except Exception, ex:
+                            logging.error('Failed to parse line (%s):\n\t-> %s' % (ex, str(line)))
+                    line = f.readline()
+        except IOError:
+            print 'Please initial [conf/application.conf] before execute the script.'
+            import sys
+            sys.exit()
 
 __rrapp_instance__ = None
 def get_instance():

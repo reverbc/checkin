@@ -1,3 +1,14 @@
+# Format: APP_NAME, EVENT_NAME, PATH, IS_PERMANENT (bool)
+#     APP_NAME: file name of app (REQUIRED)
+#         - Example: Mail.app -> Mail
+#     EVENT_NAME: event name inside Systen Event (OPTIONAL)
+#         - If empty: APP_NAME will be used
+#     PATH: path to application's parent folder if needed (OPTIONAL)
+#         - If empty: uses "/Application/"
+#         - If starts with /: uses absolutely path
+#         - If starts without /: uses relatively path to /Application/
+#     IS_PERMANENT: should this app be opened at all time (OPTIONAL)
+#         - True/False
 Mail,,,False
 Microsoft Outlook,,Microsoft Office 2011,False
 Microsoft Communicator,,,False
