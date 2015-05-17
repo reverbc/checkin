@@ -1,3 +1,5 @@
+import os
+
 from ciapp import CIApp
 import logging
 import ciconf
@@ -61,8 +63,9 @@ class CIApps(object):
         self._app_list = dict()
         self._papp_list = list()
 
+        app_conf_path = os.path.join(ciconf.CONF_PATH, ciconf.APP_CONF)
         try:
-            with open('%s/%s' % (ciconf.CONF_PATH, ciconf.APP_CONF), 'r') as f:
+            with open(app_conf_path, 'r') as f:
                 line = '#'
                 while line:
                     if not line.startswith('#') and line.strip():
@@ -72,8 +75,8 @@ class CIApps(object):
                         except Exception, ex:
                             logging.error('Failed to parse line (%s):\n\t-> %s' % (ex, str(line)))
                     line = f.readline()
-        except IOError:
-            print 'Please initial [conf/application.conf] before execute the script.'
+        except IOError, ex:
+            print 'Please initial [%s] before execute the script.' % app_conf_path
             import sys
             sys.exit()
 

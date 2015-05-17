@@ -4,10 +4,10 @@ import os
 import ciconf
 
 class CIPlace(object):
-    def __init__(self):
+    def __init__(self, name=None):
         super(CIPlace, self).__init__()
 
-        self.name = None
+        self.name = name
         self.ap_name = []
         self.close_app_list = []
         self.open_app_list = []
