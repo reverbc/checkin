@@ -65,6 +65,7 @@ class CIPlaces(object):
                         line = pconf.readline()
                     self._place_list[pname] = nl
 
+NOWHERE = 'nowhere'
 
 __rrplace_instance__ = None
 def get_instance():
