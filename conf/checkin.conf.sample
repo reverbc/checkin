@@ -1,0 +1,6 @@
+LATEST_AP=/tmp/.checkin.latest_ap
+LOG_FILE=/tmp/checkin.log
+CONF_PATH=
+SCRIPT_PATH=
+APP_CONF=application.conf
+NOTIFICATION_ICON=
