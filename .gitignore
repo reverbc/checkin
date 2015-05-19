@@ -1,3 +1,4 @@
 *.pyc
 *.conf
 .DS_Store
+*.plist
