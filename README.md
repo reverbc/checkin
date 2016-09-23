@@ -17,7 +17,8 @@ Installation
 4. Make checkin.py as an executable script: `chmod +x /PATH/TO/PROJECT/checkin/checkin.py`
 5. Modify `CONF_PATH` variable in `lib/ciconf.py` 
 6. Put `com.reverbhorn.checkin.plist` into `~/Library/LaunchAgents/` and point the `ProgramArguments` variable in plist to your checkin executable path
-7. Done!
+7. Execute `launchctl load ~/Library/LaunchAgents/com.reverbhorn.checkin.plist 
+8. Done!
 
 Application Configuration (application.conf)
 --------------------------------------------
