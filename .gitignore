@@ -3,3 +3,4 @@
 .DS_Store
 *.plist
 *.sh
+.mypy_cache/
