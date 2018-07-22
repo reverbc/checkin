@@ -9,10 +9,12 @@ def get_ap_name():
         pass
     return ap_name
 
+
 def get_current_ip():
     import subprocess
     cmd = "ifconfig en0 | grep 'inet\ ' | awk '{print $2;}'"
     return subprocess.check_output(cmd, shell=True).strip()
 
+
 if __name__ == '__main__':
-    print get_ap_name()
+    print(get_ap_name())
